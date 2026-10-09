@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitrine CKY · Piste A · Éditoriale & sobre</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:var(--fond);color:var(--texte);}
+main{max-width:390px;margin:0 auto;padding:40px 16px 96px}
+header{margin-bottom:16px} .surtitre{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--doux)}
+h1{margin:0 0 6px;line-height:1.05} .accroche{margin:0;color:var(--doux);font-size:15px}
+.recherche{display:flex;align-items:center;height:48px;padding:0 14px;font-size:15px;color:var(--doux);margin-bottom:12px}
+.puces{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.puce{min-height:40px;padding:0 14px;display:inline-flex;align-items:center;font-size:14px;background:transparent;color:var(--texte)}
+.compteur{font-size:13px;color:var(--doux);margin:4px 0 12px}
+.liste{display:flex;flex-direction:column;gap:18px}
+.visuel{height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.visuel span{font-size:40px;line-height:1;letter-spacing:.02em;padding:6px 10px}
+.visuel::after{content:"";position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border:10px solid currentColor;border-radius:50%;opacity:.25}
+.carte h2{margin:10px 0 2px;font-size:18px} .carte p{margin:0;color:var(--doux);font-size:14px}
+.fab{display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:358px;margin:0 auto;height:56px;align-items:center;justify-content:center;background:var(--accent);color:var(--sur-accent);font-weight:800;font-size:16px;border-radius:var(--rayon);font-family:inherit;border:0;text-decoration:none}
+.etiquette{position:fixed;top:8px;right:8px;font:12px/1 Inter,sans-serif;background:rgba(0,0,0,.65);color:#fff;padding:5px 8px;border-radius:4px;z-index:9}
+
+:root{--fond:#FBF8F3;--surface:#FFFFFF;--texte:#1B2433;--doux:#5C6470;--accent:#1F3A5F;--sur-accent:#FFFFFF;--ligne:#E6E4DF;--rayon:2px;}
+body{font-family:Lora,Georgia,serif;}
+h1{font-weight:700;font-size:30px;letter-spacing:-.01em;border-bottom:1px solid var(--texte);padding-bottom:10px}
+.accroche{font-style:italic}
+.puce{border-radius:0;border:1px solid var(--texte);font-family:Lora,serif}
+.puce.on{background:var(--accent);color:var(--sur-accent);border-color:var(--accent)}
+.carte{border:none;border-top:1px solid var(--texte);border-radius:0;background:transparent;padding-top:14px}
+.visuel{border-radius:0}
+.carte h2{font-size:21px}
+.recherche{border-radius:0;border:1px solid var(--texte);background:var(--surface)}
+.v1{background:var(--accent);color:#FBF8F3}.v2{background:#E6E4DF;color:var(--accent)}.v3{background:#2E3B4E;color:#E6E4DF}
+.visuel span{font-family:Lora,serif;font-style:italic;font-weight:700}
+</style>
+</head>
+<body>
+<span class="etiquette">Piste A · Éditoriale & sobre</span>
+<main>
+  <header>
+    <p class='surtitre'>Portfolio · Kevin Youssef</p>
+    <h1>Vitrine CKY</h1>
+    <p class="accroche">Visuels pour le sport en Suisse romande</p>
+  </header>
+  <label class="recherche" for="q">Rechercher un sport, un club…</label>
+  <input id="q" type="search" hidden>
+  <div class="puces" role="group" aria-label="Filtrer par type">
+    <button class="puce on" type="button" aria-pressed="true">Tout</button>
+    <button class="puce" type="button" aria-pressed="false">Affiches de match</button>
+    <button class="puce" type="button" aria-pressed="false">Logos</button>
+    <button class="puce" type="button" aria-pressed="false">Réseaux sociaux</button>
+  </div>
+  <p class="compteur">12 projets</p>
+  <section class="liste">
+    <article class="carte"><div class="visuel v1" role="img" aria-label="Aperçu : Affiche derby"><span>DERBY</span></div>
+      <div class="infos"><h2>Affiche derby</h2><p>Riviera Hoops · Basket · 2026</p></div></article>
+    <article class="carte"><div class="visuel v2" role="img" aria-label="Aperçu : Logo tournoi d’été"><span>V/L</span></div>
+      <div class="infos"><h2>Logo tournoi d’été</h2><p>Volley Lavaux · Volley · 2025</p></div></article>
+    <article class="carte"><div class="visuel v3" role="img" aria-label="Aperçu : Pack matchday Instagram"><span>MATCH DAY</span></div>
+      <div class="infos"><h2>Pack matchday Instagram</h2><p>FC Grand-Lac · Football · 2026</p></div></article>
+  </section>
+</main>
+<a class="fab" href="#">Demander un devis</a>
+</body>
+</html>
