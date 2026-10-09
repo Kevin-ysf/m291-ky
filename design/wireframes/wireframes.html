@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframes · Vitrine CKY</title>
+<style>
+  /* Basse fidélité : uniquement noir, blanc et gris. */
+  :root { --noir:#111; --gris:#777; --clair:#e5e5e5; --fond:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#d4d4d4; font-family:Arial, Helvetica, sans-serif; color:var(--noir); display:flex; gap:40px; padding:40px; align-items:flex-start; }
+  .ecran { width:390px; height:844px; background:var(--fond); border:2px solid var(--noir); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .note { position:absolute; top:6px; right:8px; font-size:11px; color:var(--gris); }
+  header { padding:20px 16px 12px; border-bottom:2px solid var(--noir); }
+  header .titre { font-size:22px; font-weight:700; }
+  header .sous { font-size:13px; color:var(--gris); margin-top:4px; }
+  .recherche { margin:14px 16px 10px; height:48px; border:2px solid var(--noir); border-radius:6px; display:flex; align-items:center; padding:0 12px; font-size:15px; color:var(--gris); }
+  .recherche.rempli { color:var(--noir); }
+  .puces { display:flex; gap:8px; padding:0 16px 12px; flex-wrap:wrap; }
+  .puce { height:36px; padding:0 12px; border:2px solid var(--noir); border-radius:18px; display:flex; align-items:center; font-size:13px; }
+  .puce.on { background:var(--noir); color:#fff; }
+  .compteur { padding:0 16px 8px; font-size:13px; color:var(--gris); }
+  .liste { padding:0 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden; }
+  .carte { border:2px solid var(--noir); border-radius:6px; overflow:hidden; flex-shrink:0; }
+  .img { position:relative; background:var(--clair); height:150px; border-bottom:2px solid var(--noir); }
+  .img::before, .img::after { content:""; position:absolute; inset:0; background:linear-gradient(to top right, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
+  .img::after { background:linear-gradient(to top left, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
+  .img.grand { height:300px; }
+  .infos { padding:10px 12px; }
+  .ligne { height:12px; background:var(--noir); border-radius:2px; width:70%; margin-bottom:8px; }
+  .ligne.gris { background:#bbb; width:45%; height:10px; margin:0; }
+  .label { font-size:15px; font-weight:700; }
+  .meta { font-size:12px; color:var(--gris); margin-top:4px; }
+  .detail { padding:16px; }
+  .detail h2 { margin:0 0 6px; font-size:22px; }
+  .tableau { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:13px; margin:14px 0; }
+  .tableau dt { color:var(--gris); } .tableau dd { margin:0; }
+  .texte .ligne { background:#bbb; height:10px; width:100%; } .texte .ligne:last-child { width:60%; }
+  .retour { font-size:14px; padding:14px 16px; border-bottom:2px solid var(--noir); }
+  .cta { position:absolute; left:16px; right:16px; bottom:20px; height:56px; background:var(--noir); color:#fff; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; }
+  .nav { margin-top:auto; height:64px; border-top:2px solid var(--noir); display:flex; justify-content:space-around; align-items:center; font-size:12px; background:#fff; position:relative; z-index:1; }
+</style>
+</head>
+<body>
+
+<!-- Écran 1 : accueil et exploration -->
+<section class="ecran" id="s1">
+  <span class="note">01 · accueil</span>
+  <header><div class="titre">Vitrine CKY</div><div class="sous">Visuels pour le sport en Suisse romande</div></header>
+  <div class="recherche">Rechercher un sport, un club…</div>
+  <div class="puces"><span class="puce on">Tout</span><span class="puce">Affiches de match</span><span class="puce">Logos</span><span class="puce">Réseaux sociaux</span></div>
+  <div class="compteur">12 projets</div>
+  <div class="liste">
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
+  </div>
+  <nav class="nav"><span>Projets</span><span>À propos</span><span>Contact</span></nav>
+</section>
+
+<!-- Écran 2 : vue filtrée -->
+<section class="ecran" id="s2">
+  <span class="note">02 · recherche + filtre</span>
+  <header><div class="titre">Vitrine CKY</div><div class="sous">Visuels pour le sport en Suisse romande</div></header>
+  <div class="recherche rempli"><span>basket</span><span style="margin-left:auto">✕</span></div>
+  <div class="puces"><span class="puce">Tout</span><span class="puce on">Affiches de match ✓</span><span class="puce">Logos</span><span class="puce">Réseaux sociaux</span></div>
+  <div class="compteur">3 projets · « basket » · Affiches de match</div>
+  <div class="liste">
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche derby</div><div class="meta">Riviera Hoops · basket · 2026</div></div></div>
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche ouverture de saison</div><div class="meta">Riviera Hoops · basket · 2025</div></div></div>
+    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche finale U18</div><div class="meta">BC Lavaux · basket · 2025</div></div></div>
+  </div>
+  <nav class="nav"><span>Projets</span><span>À propos</span><span>Contact</span></nav>
+</section>
+
+<!-- Écran 3 : fiche détaillée -->
+<section class="ecran" id="s3">
+  <span class="note">03 · fiche détail</span>
+  <div class="retour">← Retour aux projets</div>
+  <div class="img grand"></div>
+  <div class="detail">
+    <h2>Affiche derby</h2>
+    <div class="meta">Riviera Hoops vs Lausanne</div>
+    <dl class="tableau">
+      <dt>Sport</dt><dd>Basket</dd>
+      <dt>Format</dt><dd>Affiche A3 + story Instagram</dd>
+      <dt>Année</dt><dd>2026</dd>
+      <dt>Délai</dt><dd>5 jours</dd>
+    </dl>
+    <div class="texte"><div class="ligne"></div><div class="ligne"></div><div class="ligne"></div></div>
+  </div>
+  <div class="cta">Demander un devis pour ce style</div>
+</section>
+
+</body>
+</html>
