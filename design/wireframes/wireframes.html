@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wireframes · Vitrine CKY</title>
+<title>Wireframes · TeamSplit</title>
 <style>
   /* Basse fidélité : uniquement noir, blanc et gris. */
   :root { --noir:#111; --gris:#777; --clair:#e5e5e5; --fond:#fff; }
@@ -16,80 +16,76 @@
   header .sous { font-size:13px; color:var(--gris); margin-top:4px; }
   .recherche { margin:14px 16px 10px; height:48px; border:2px solid var(--noir); border-radius:6px; display:flex; align-items:center; padding:0 12px; font-size:15px; color:var(--gris); }
   .recherche.rempli { color:var(--noir); }
-  .puces { display:flex; gap:8px; padding:0 16px 12px; flex-wrap:wrap; }
-  .puce { height:36px; padding:0 12px; border:2px solid var(--noir); border-radius:18px; display:flex; align-items:center; font-size:13px; }
+  .puces { display:flex; gap:8px; padding:0 16px 12px; }
+  .puce { height:40px; padding:0 14px; border:2px solid var(--noir); border-radius:20px; display:flex; align-items:center; font-size:14px; }
   .puce.on { background:var(--noir); color:#fff; }
   .compteur { padding:0 16px 8px; font-size:13px; color:var(--gris); }
-  .liste { padding:0 16px; display:flex; flex-direction:column; gap:14px; overflow:hidden; }
-  .carte { border:2px solid var(--noir); border-radius:6px; overflow:hidden; flex-shrink:0; }
-  .img { position:relative; background:var(--clair); height:150px; border-bottom:2px solid var(--noir); }
-  .img::before, .img::after { content:""; position:absolute; inset:0; background:linear-gradient(to top right, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
-  .img::after { background:linear-gradient(to top left, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
-  .img.grand { height:300px; }
-  .infos { padding:10px 12px; }
-  .ligne { height:12px; background:var(--noir); border-radius:2px; width:70%; margin-bottom:8px; }
-  .ligne.gris { background:#bbb; width:45%; height:10px; margin:0; }
+  .compteur b { color:var(--noir); }
+  .liste { padding:0 16px; display:flex; flex-direction:column; gap:10px; }
+  .joueur { flex-shrink:0; height:64px; border:2px solid var(--noir); border-radius:6px; display:flex; align-items:center; gap:12px; padding:0 12px; }
+  .joueur.on { background:var(--clair); border-width:3px; }
+  .avatar { width:40px; height:40px; border-radius:50%; border:2px solid var(--gris); position:relative; overflow:hidden; background:var(--clair); }
+  .avatar::before, .avatar::after { content:""; position:absolute; inset:0; background:linear-gradient(45deg, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
+  .avatar::after { background:linear-gradient(-45deg, transparent calc(50% - 1px), var(--gris) 50%, transparent calc(50% + 1px)); }
+  .qui { flex:1; }
   .label { font-size:15px; font-weight:700; }
-  .meta { font-size:12px; color:var(--gris); margin-top:4px; }
-  .detail { padding:16px; }
-  .detail h2 { margin:0 0 6px; font-size:22px; }
-  .tableau { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:13px; margin:14px 0; }
-  .tableau dt { color:var(--gris); } .tableau dd { margin:0; }
-  .texte .ligne { background:#bbb; height:10px; width:100%; } .texte .ligne:last-child { width:60%; }
-  .retour { font-size:14px; padding:14px 16px; border-bottom:2px solid var(--noir); }
+  .meta { font-size:12px; color:var(--gris); }
+  .case { width:28px; height:28px; border:2px solid var(--noir); border-radius:4px; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .joueur.on .case { background:var(--noir); color:#fff; }
   .cta { position:absolute; left:16px; right:16px; bottom:20px; height:56px; background:var(--noir); color:#fff; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; }
-  .nav { margin-top:auto; height:64px; border-top:2px solid var(--noir); display:flex; justify-content:space-around; align-items:center; font-size:12px; background:#fff; position:relative; z-index:1; }
+  .cta.off { background:var(--clair); color:var(--gris); border:2px dashed var(--gris); }
+  .aide { position:absolute; left:16px; right:16px; bottom:84px; font-size:12px; color:var(--gris); text-align:center; }
+  .retour { font-size:14px; padding:14px 16px; border-bottom:2px solid var(--noir); }
+  .contenu { padding:16px; }
+  .contenu h2 { margin:0 0 4px; font-size:22px; }
+  .ecart { font-size:14px; margin-bottom:14px; border:2px solid var(--noir); border-radius:6px; padding:10px 12px; }
+  .colonnes { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .equipe { border:2px solid var(--noir); border-radius:6px; padding:10px; }
+  .eq-titre { font-weight:700; font-size:17px; }
+  .total { font-size:12px; margin:2px 0 8px; padding-bottom:8px; border-bottom:2px solid var(--noir); }
+  .equipe ul { list-style:none; margin:0; padding:0; }
+  .equipe li { display:flex; flex-direction:column; padding:6px 0; border-bottom:1px solid var(--clair); font-size:14px; }
+  .boutons { position:absolute; left:16px; right:16px; bottom:20px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .boutons div { height:56px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; border:2px solid var(--noir); }
+  .boutons .plein { background:var(--noir); color:#fff; }
 </style>
 </head>
 <body>
 
-<!-- Écran 1 : accueil et exploration -->
+<!-- Écran 1 : accueil et liste des joueurs -->
 <section class="ecran" id="s1">
   <span class="note">01 · accueil</span>
-  <header><div class="titre">Vitrine CKY</div><div class="sous">Visuels pour le sport en Suisse romande</div></header>
-  <div class="recherche">Rechercher un sport, un club…</div>
-  <div class="puces"><span class="puce on">Tout</span><span class="puce">Affiches de match</span><span class="puce">Logos</span><span class="puce">Réseaux sociaux</span></div>
-  <div class="compteur">12 projets</div>
-  <div class="liste">
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Titre du projet</div><div class="meta">Club · sport · année</div></div></div>
-  </div>
-  <nav class="nav"><span>Projets</span><span>À propos</span><span>Contact</span></nav>
+  <header><div class="titre">TeamSplit</div><div class="sous">Des équipes justes, en un geste</div></header>
+  <div class="recherche">Rechercher un joueur…</div>
+  <div class="puces"><span class="puce on">Tous</span><span class="puce">Foot</span><span class="puce">Basket</span><span class="puce">Volley</span></div>
+  <div class="compteur">14 joueurs · <b>0 présent</b></div>
+  <div class="liste"><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★★☆☆</div></div><div class="case"></div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★★★☆</div></div><div class="case"></div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★☆☆☆</div></div><div class="case"></div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★★★★</div></div><div class="case"></div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★★☆☆</div></div><div class="case"></div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Prénom</div><div class="meta">Poste · ★★★★☆</div></div><div class="case"></div></div></div>
+  <div class="aide">Coche au moins 4 joueurs</div>
+  <div class="cta off">Faire les équipes</div>
 </section>
 
-<!-- Écran 2 : vue filtrée -->
+<!-- Écran 2 : vue filtrée et sélection des présents -->
 <section class="ecran" id="s2">
-  <span class="note">02 · recherche + filtre</span>
-  <header><div class="titre">Vitrine CKY</div><div class="sous">Visuels pour le sport en Suisse romande</div></header>
-  <div class="recherche rempli"><span>basket</span><span style="margin-left:auto">✕</span></div>
-  <div class="puces"><span class="puce">Tout</span><span class="puce on">Affiches de match ✓</span><span class="puce">Logos</span><span class="puce">Réseaux sociaux</span></div>
-  <div class="compteur">3 projets · « basket » · Affiches de match</div>
-  <div class="liste">
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche derby</div><div class="meta">Riviera Hoops · basket · 2026</div></div></div>
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche ouverture de saison</div><div class="meta">Riviera Hoops · basket · 2025</div></div></div>
-    <div class="carte"><div class="img"></div><div class="infos"><div class="label">Affiche finale U18</div><div class="meta">BC Lavaux · basket · 2025</div></div></div>
-  </div>
-  <nav class="nav"><span>Projets</span><span>À propos</span><span>Contact</span></nav>
+  <span class="note">02 · filtre + sélection</span>
+  <header><div class="titre">TeamSplit</div><div class="sous">Des équipes justes, en un geste</div></header>
+  <div class="recherche">Rechercher un joueur…</div>
+  <div class="puces"><span class="puce">Tous</span><span class="puce on">Foot ✓</span><span class="puce">Basket</span><span class="puce">Volley</span></div>
+  <div class="compteur">Foot · 12 joueurs · <b>10 présents</b></div>
+  <div class="liste"><div class="joueur on"><div class="avatar"></div><div class="qui"><div class="label">Yanis</div><div class="meta">Milieu · ★★★★☆</div></div><div class="case">✓</div></div><div class="joueur on"><div class="avatar"></div><div class="qui"><div class="label">Luca</div><div class="meta">Défense · ★★★☆☆</div></div><div class="case">✓</div></div><div class="joueur on"><div class="avatar"></div><div class="qui"><div class="label">Inès</div><div class="meta">Attaque · ★★★★★</div></div><div class="case">✓</div></div><div class="joueur"><div class="avatar"></div><div class="qui"><div class="label">Noah</div><div class="meta">Gardien · ★★★☆☆</div></div><div class="case"></div></div><div class="joueur on"><div class="avatar"></div><div class="qui"><div class="label">Sami</div><div class="meta">Milieu · ★★☆☆☆</div></div><div class="case">✓</div></div><div class="joueur on"><div class="avatar"></div><div class="qui"><div class="label">Léo</div><div class="meta">Attaque · ★★★★☆</div></div><div class="case">✓</div></div></div>
+  <div class="cta">Faire les équipes (10)</div>
 </section>
 
-<!-- Écran 3 : fiche détaillée -->
+<!-- Écran 3 : équipes générées -->
 <section class="ecran" id="s3">
-  <span class="note">03 · fiche détail</span>
-  <div class="retour">← Retour aux projets</div>
-  <div class="img grand"></div>
-  <div class="detail">
-    <h2>Affiche derby</h2>
-    <div class="meta">Riviera Hoops vs Lausanne</div>
-    <dl class="tableau">
-      <dt>Sport</dt><dd>Basket</dd>
-      <dt>Format</dt><dd>Affiche A3 + story Instagram</dd>
-      <dt>Année</dt><dd>2026</dd>
-      <dt>Délai</dt><dd>5 jours</dd>
-    </dl>
-    <div class="texte"><div class="ligne"></div><div class="ligne"></div><div class="ligne"></div></div>
+  <span class="note">03 · équipes</span>
+  <div class="retour">← Modifier les présents</div>
+  <div class="contenu">
+    <h2>Tes équipes</h2>
+    <div class="meta" style="margin-bottom:12px">Foot · 10 joueurs · jeudi soir</div>
+    <div class="ecart">Écart de niveau : <b>1 point</b> (17 contre 16)</div>
+    <div class="colonnes"><div class="equipe"><div class="eq-titre">Équipe A</div><div class="total">Niveau total : 17</div><ul><li><span>Inès</span><span class="meta">Attaque · 5</span></li><li><span>Luca</span><span class="meta">Défense · 3</span></li><li><span>Sami</span><span class="meta">Milieu · 2</span></li><li><span>Maé</span><span class="meta">Gardien · 4</span></li><li><span>Tom</span><span class="meta">Milieu · 3</span></li></ul></div><div class="equipe"><div class="eq-titre">Équipe B</div><div class="total">Niveau total : 16</div><ul><li><span>Yanis</span><span class="meta">Milieu · 4</span></li><li><span>Léo</span><span class="meta">Attaque · 4</span></li><li><span>Noah</span><span class="meta">Gardien · 3</span></li><li><span>Eli</span><span class="meta">Défense · 3</span></li><li><span>Zoé</span><span class="meta">Milieu · 2</span></li></ul></div></div>
   </div>
-  <div class="cta">Demander un devis pour ce style</div>
+  <div class="boutons"><div>↻ Remélanger</div><div class="plein">Partager</div></div>
 </section>
 
 </body>
