@@ -1,19 +1,19 @@
 # Fiche d’observation · e2-7
 
-**App testée :** Vitrine CKY (maquette Piste C)
+**App testée :** TeamSplit (maquette Piste C)
 **Testeur :**
 **Observateur :** Kevin Youssef
-**Tâche donnée :** trouver un exemple d’affiche de match de basket et demander un devis pour le même style.
+**Tâche donnée :** cocher les joueurs présents sauf Noah, puis lancer la création des équipes.
 
 ## Test 5 secondes
 
 « C’est une appli pour… » (phrase du testeur) :
 
-Écart avec l’intention (intention : « voir mes visuels pour le sport et me demander un devis ») :
+Écart avec l’intention (intention : « former des équipes équilibrées entre amis ») :
 
 ## Test de localisation (sur image, une tâche)
 
-Consigne dite : « Montrez où vous tapoteriez pour : **voir seulement les affiches de match** »
+Consigne dite : « Montre où tu tapoterais pour : **ne voir que les joueurs de foot** »
 
 Le doigt est allé au **bon** contrôle : oui / non / à côté
 Hésitation :
