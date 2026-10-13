@@ -1,19 +1,19 @@
 # Pitch · mon app M291
 
-**Nom de l’app :** Vitrine CKY
+**Nom de l’app :** TeamSplit
 
-**En une phrase, elle sert à :** montrer mes créations graphiques pour le sport (affiches de match, logos, visuels réseaux sociaux) sous forme de fiches qu’on peut filtrer, puis me demander un devis en un geste.
+**En une phrase, elle sert à :** former des équipes équilibrées entre amis en quelques secondes, à partir de la liste des joueurs présents et de leur niveau.
 
-**À qui (prénom + âge + situation) :** Marc, 42 ans, responsable communication bénévole d’un club de basket amateur à Vevey, qui cherche un graphiste pour les affiches de la saison.
+**À qui (prénom + âge + situation) :** Yanis, 19 ans, apprenti à Lausanne, qui organise le foot du jeudi soir avec une douzaine de potes et perd 10 minutes à chaque fois à faire les équipes.
 
-**La tâche n°1 (celle du flow) :** trouver un exemple d’affiche de match de basket et demander un devis pour une affiche du même style.
+**La tâche n°1 (celle du flow) :** cocher les joueurs présents ce soir et générer deux équipes équilibrées, puis les partager dans le groupe WhatsApp.
 
-**Les données (inventées) ressemblent à :** fiches de projets (titre, club client, sport, type de visuel, année, image, description courte).
+**Les données (inventées) ressemblent à :** fiches de joueurs (prénom, sport préféré, niveau de 1 à 5, poste, présent ce soir oui / non).
 
-**Pourquoi ce n’est pas trop grand pour 4 semaines de code :** 3 écrans seulement (liste, liste filtrée, fiche détail), une douzaine de projets dans un seul fichier JSON, un filtre par type + une recherche par mot-clé, et une demande de devis par un simple formulaire `mailto:` sans serveur ni compte.
+**Pourquoi ce n’est pas trop grand pour 4 semaines de code :** 3 écrans seulement (liste des joueurs, liste filtrée des présents, équipes générées), une quinzaine de joueurs dans un seul fichier JSON, un filtre par sport + une recherche par prénom, et un calcul simple : on trie les joueurs par niveau et on les répartit en alternance. Pas de compte, pas de serveur.
 
 ## Les 3 questions
 
-1. **Pour qui ?** Les responsables communication de petits clubs sportifs de Suisse romande, souvent bénévoles, qui doivent sortir des visuels chaque semaine.
-2. **Quel besoin non satisfait ?** Un portfolio classique (Behance, Instagram) mélange tout : on ne trouve pas vite un exemple du bon sport et du bon format, et on ne sait pas comment demander un prix.
-3. **Quelle réponse UI ?** Une vitrine mobile épurée : des cartes de projets filtrables par type de visuel, une fiche détail avec le contexte du projet, et un bouton « Demander un devis pour ce style » qui préremplit la demande.
+1. **Pour qui ?** Les jeunes de Suisse romande qui jouent entre amis (foot, basket, volley) le soir ou le week-end, sans club ni entraîneur.
+2. **Quel besoin non satisfait ?** Faire les équipes « à la main » prend du temps, finit souvent en dispute, et ce sont toujours les deux mêmes capitaines qui choisissent les meilleurs.
+3. **Quelle réponse UI ?** Une app mobile ultra simple : on coche qui est là, on touche un gros bouton « Faire les équipes », et on voit deux colonnes avec le niveau total de chaque équipe, prêtes à partager.

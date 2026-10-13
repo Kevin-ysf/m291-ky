@@ -1,27 +1,27 @@
 # Persona
 
-**Prénom et âge :** Marc, 42 ans
-**Occupation :** comptable à 80 % à Vevey, et responsable communication bénévole du club de basket amateur « Riviera Hoops »
-**Où et quand il utilise l’app :** le soir, assis dans les gradins pendant l’entraînement des juniors, ou dans le train Vevey → Lausanne le matin. Il a 10 minutes, pas plus.
-**Appareil :** surtout téléphone (iPhone, environ 390 px de large), tenu à une main
+**Prénom et âge :** Yanis, 19 ans
+**Occupation :** apprenti électricien en 2e année à Lausanne, organisateur du foot du jeudi soir avec ses amis
+**Où et quand il utilise l’app :** le jeudi vers 19 h, debout au bord du terrain synthétique de Vidy, pendant que les autres arrivent. Il a 2 minutes avant le coup d’envoi, souvent avec un ballon sous le bras.
+**Appareil :** surtout téléphone (Android, environ 390 px de large), tenu à une main
 
 ## Objectif (une phrase)
 
-Trouver vite un graphiste qui sait faire des affiches de match de basket, voir un exemple concret, et lui demander un prix sans passer une heure à écrire un mail.
+Faire deux équipes justes en moins d’une minute, pour que personne ne râle et que le match commence vite.
 
 ## Phrase typique (ce qu’il dirait vraiment)
 
-« Je veux juste voir s’il a déjà fait du basket, et savoir combien ça coûte. Je n’ai pas le temps de fouiller tout son Instagram. »
+« Franchement, à chaque fois c’est la même dispute : les deux qui choisissent prennent leurs potes et le match est plié en dix minutes. »
 
 ## Ce qui le fait fermer l’onglet
 
-* Une page qui met plus de 3 secondes à charger dans le train.
-* Devoir créer un compte ou laisser son numéro avant de voir les projets.
-* Des textes trop petits ou du gris clair sur blanc, illisibles au soleil dans les gradins.
-* Ne pas trouver de bouton pour contacter le graphiste.
+* Devoir créer un compte ou entrer une adresse e-mail avant de faire une équipe.
+* Des petites cases à cocher qu’on rate avec le pouce.
+* Un écran trop chargé, illisible en plein air le soir sous les projecteurs.
+* Un résultat sans explication : s’il ne voit pas pourquoi c’est équilibré, les autres vont contester.
 
 ## 3 faits utiles pour le design
 
-1. **Il utilise une seule main :** le bouton principal doit être en bas de l’écran, avec une cible tactile d’au moins 48 px.
-2. **Il pense par sport et par format** (« une affiche de match », « un post Instagram ») : le filtre doit utiliser ces mots, pas du jargon de graphiste.
-3. **Il n’est pas designer :** il juge sur l’image. Les visuels doivent être grands, et le texte court (titre, club, année).
+1. **Il utilise une seule main, dehors :** grandes zones tactiles (48 px minimum), fort contraste, bouton principal en bas de l’écran.
+2. **Il doit convaincre le groupe :** le résultat doit afficher le niveau total de chaque équipe pour prouver qu’elles sont équilibrées.
+3. **Le groupe change chaque semaine :** cocher les présents doit être plus rapide que retaper les noms. La liste des joueurs reste enregistrée d’une fois à l’autre.
