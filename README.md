@@ -51,6 +51,6 @@ Pour réaliser ce projet, j'utilise les technologies suivantes :
 | s7 | Trois designs, critique | [design/propositions/](design/propositions/), [design/critique.md](design/critique.md) |
 | s8 | Tests utilisateurs | [design/tests-utilisateurs.md](design/tests-utilisateurs.md), [design/observation.md](design/observation.md) |
 
-## Projet M291 : Vitrine CKY
+## Projet M291 : TeamSplit
 
-Une vitrine mobile de mes visuels pour le sport (affiches de match, logos, réseaux sociaux), filtrable par type, avec une demande de devis en un geste. Voir le [brief](brief.md).
+Une app mobile pour former des équipes équilibrées entre amis : on coche les joueurs présents, on touche « Faire les équipes », et on obtient deux équipes avec leur niveau total. Voir le [brief](brief.md).
