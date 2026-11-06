@@ -5,15 +5,18 @@ Des équipes justes, en un geste. On coche les joueurs présents, TeamSplit gén
 Conception : [brief](../brief.md) · [persona](../design/persona.md) · [user flow](../design/user-flow.md) · [critique des 3 pistes](../design/critique.md) (Piste C retenue).
 
 ## Lancer le site
-Le site charge `joueurs.json` avec `fetch`. Il faut donc l’ouvrir avec un serveur : **Live Server** dans VS Code, ou directement sur GitHub Pages. Un double clic sur `index.html` bloque le chargement.
+Le site charge `data.json` (à la racine du dépôt) avec `fetch`. Il faut donc l’ouvrir avec un serveur : **Live Server** dans VS Code, ou directement sur GitHub Pages. Un double clic sur `index.html` bloque le chargement.
 
 ## Structure
 ```
 index.html        les 3 écrans (liste, sélection, équipes)
 css/style.css     variables dans :root, mobile first, media query bureau (768 px)
 js/app.js         chargement, filtre, recherche, sélection, répartition, partage
-joueurs.json      32 joueurs (id, prenom, sport, poste, niveau)
+../data.json      32 joueurs (base JSON de l’exercice s10)
 ```
+
+## Les données (data.json)
+Chaque joueur a 8 champs typés : `id` (nombre), `prenom`, `sport`, `poste`, `commune` (textes), `niveau` (nombre de 1 à 5), `estRegulier` (booléen) et `tags` (tableau de textes). Les communes sont en Suisse romande. L’app utilise `prenom`, `sport`, `poste` et `niveau` ; `commune`, `estRegulier` et `tags` sont prêts pour un futur filtre.
 
 ## Écarts avec la maquette (Piste C) et pourquoi
 * **Avatars allégés** (gris clair au lieu de noir) : la critique notait qu’ils écrasaient les prénoms.
