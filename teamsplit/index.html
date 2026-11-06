@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TeamSplit · Des équipes justes, en un geste</title>
+  <meta name="description" content="Coche les joueurs présents et génère deux équipes équilibrées selon leur niveau. Sans compte, sans pub.">
+  <meta name="theme-color" content="#F7F7F5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E0F12'/%3E%3Crect x='17' y='6' width='9' height='20' rx='2' fill='%232BD97C'/%3E%3Crect x='6' y='6' width='9' height='20' rx='2' fill='%23F7F7F5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="lien-evitement" href="#contenu">Aller au contenu</a>
+
+  <main id="contenu">
+
+    <!-- Écrans 1 et 2 : liste, filtres et sélection -->
+    <section id="vue-selection" class="vue" aria-labelledby="titre-app">
+      <header class="entete">
+        <p id="surtitre" class="surtitre">Ce soir</p>
+        <h1 id="titre-app" class="logo" tabindex="-1">Team<span>Split</span></h1>
+        <p class="accroche">Des équipes justes, en un geste.</p>
+      </header>
+
+      <form class="recherche" role="search" id="form-recherche">
+        <label for="recherche" class="sr-only">Chercher un joueur par prénom</label>
+        <svg class="recherche-icone" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <input type="search" id="recherche" name="recherche" placeholder="Chercher un prénom" autocomplete="off" enterkeyhint="search">
+        <button type="button" id="effacer" class="effacer" aria-label="Effacer la recherche" hidden>
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+        </button>
+      </form>
+
+      <div class="puces" role="group" aria-label="Filtrer par sport">
+        <button type="button" class="puce" data-sport="tous" aria-pressed="true">Tous</button>
+        <button type="button" class="puce" data-sport="foot" aria-pressed="false">Foot</button>
+        <button type="button" class="puce" data-sport="basket" aria-pressed="false">Basket</button>
+        <button type="button" class="puce" data-sport="volley" aria-pressed="false">Volley</button>
+      </div>
+
+      <div class="barre-liste">
+        <p id="compteur" class="compteur" aria-live="polite"><strong>0</strong> présent</p>
+        <button type="button" id="tout-decocher" class="lien-action" hidden>Tout décocher</button>
+      </div>
+
+      <ul id="liste" class="liste" aria-label="Joueurs"></ul>
+      <p id="message-liste" class="message-liste" hidden></p>
+
+      <footer class="pied">
+        <p>© 2026 Kevin Youssef · M291</p>
+      </footer>
+
+      <div class="barre-action">
+        <p id="aide" class="aide">Coche au moins 4 joueurs.</p>
+        <button type="button" id="faire" class="btn btn-principal" disabled>Faire les équipes</button>
+      </div>
+    </section>
+
+    <!-- Écran 3 : équipes générées -->
+    <section id="vue-equipes" class="vue" aria-labelledby="titre-equipes" hidden>
+      <div class="entete-equipes">
+        <button type="button" id="retour" class="btn-retour">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sélection
+        </button>
+        <h1 id="titre-equipes" class="titre-equipes" tabindex="-1">Les équipes</h1>
+      </div>
+
+      <div class="tableau" role="group" aria-label="Niveau total des équipes">
+        <p class="tableau-score tableau-a"><span class="lettre">A</span><span class="sr-only">Équipe A, niveau total </span><span id="total-a" class="chiffre">0</span></p>
+        <span class="tableau-sep" aria-hidden="true">:</span>
+        <p class="tableau-score tableau-b"><span id="total-b" class="chiffre">0</span><span class="sr-only"> pour l'équipe B</span><span class="lettre">B</span></p>
+      </div>
+      <p id="ecart" class="ecart" aria-live="polite">Écart : 0 point</p>
+
+      <div class="equipes">
+        <section class="equipe equipe-a" aria-labelledby="titre-a">
+          <h2 id="titre-a" class="equipe-titre"><span class="pastille" aria-hidden="true">A</span>Équipe A</h2>
+          <ul id="liste-a" class="equipe-liste"></ul>
+        </section>
+        <section class="equipe equipe-b" aria-labelledby="titre-b">
+          <h2 id="titre-b" class="equipe-titre"><span class="pastille" aria-hidden="true">B</span>Équipe B</h2>
+          <ul id="liste-b" class="equipe-liste"></ul>
+        </section>
+      </div>
+
+      <div class="barre-action barre-double">
+        <button type="button" id="remelanger" class="btn btn-secondaire">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h11l-3-3M20 17H9l3 3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Remélanger
+        </button>
+        <button type="button" id="partager" class="btn btn-principal">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 4H6a2 2 0 0 0-2 2v10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          Partager
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <p id="toast" class="toast" role="status" aria-live="polite"></p>
+</body>
+</html>
