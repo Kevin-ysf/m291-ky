@@ -50,7 +50,7 @@ Pour réaliser ce projet, j'utilise les technologies suivantes :
 | s6 | Wireframes | [design/wireframes/](design/wireframes/) |
 | s7 | Trois designs, critique | [design/propositions/](design/propositions/), [design/critique.md](design/critique.md) |
 | s8 | Tests utilisateurs | [design/tests-utilisateurs.md](design/tests-utilisateurs.md), [design/observation.md](design/observation.md) |
-| s9 à s17 | App TeamSplit | [teamsplit/](teamsplit/) |
+| s9 à s17 | App TeamSplit, base JSON (s10) | [teamsplit/](teamsplit/), [data.json](data.json) |
 
 ## Projet M291 : TeamSplit
 
