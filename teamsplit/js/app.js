@@ -45,7 +45,7 @@ const el = {
 
 async function chargerJoueurs() {
   try {
-    const reponse = await fetch('joueurs.json');
+    const reponse = await fetch('../data.json');
     if (!reponse.ok) throw new Error('HTTP ' + reponse.status);
     etat.joueurs = await reponse.json();
     afficherListe();
