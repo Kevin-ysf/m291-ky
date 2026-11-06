@@ -60,7 +60,7 @@ Persona complet : [design/persona.md](design/persona.md) · User flow : [design/
 ## 6. Contraintes techniques & ergonomiques
 
 * **Approche :** mobile first (largeur de référence 390 px), cibles tactiles de 48 px minimum.
-* **Technologie :** HTML5 sémantique vanilla, CSS moderne avec variables, JavaScript natif sans bibliothèque. Les joueurs sont dans un fichier `joueurs.json`.
+* **Technologie :** HTML5 sémantique vanilla, CSS moderne avec variables, JavaScript natif sans bibliothèque. Les joueurs sont dans un fichier `data.json`, à la racine du dépôt.
 * **Accessibilité :** ratios de contraste WCAG AA (≥ 4,5:1), navigation complète au clavier (Tab / Entrée / Espace), état coché annoncé (`aria-pressed`), information jamais donnée par la couleur seule.
 
 ## 7. Interdits
