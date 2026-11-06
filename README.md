@@ -50,7 +50,8 @@ Pour réaliser ce projet, j'utilise les technologies suivantes :
 | s6 | Wireframes | [design/wireframes/](design/wireframes/) |
 | s7 | Trois designs, critique | [design/propositions/](design/propositions/), [design/critique.md](design/critique.md) |
 | s8 | Tests utilisateurs | [design/tests-utilisateurs.md](design/tests-utilisateurs.md), [design/observation.md](design/observation.md) |
+| s9 à s17 | App TeamSplit | [teamsplit/](teamsplit/) |
 
 ## Projet M291 : TeamSplit
 
-Une app mobile pour former des équipes équilibrées entre amis : on coche les joueurs présents, on touche « Faire les équipes », et on obtient deux équipes avec leur niveau total. Voir le [brief](brief.md).
+Une app mobile pour former des équipes équilibrées entre amis : on coche les joueurs présents, on touche « Faire les équipes », et on obtient deux équipes avec leur niveau total. Voir le [brief](brief.md) et [l’app](teamsplit/).
