@@ -387,6 +387,83 @@ main {
 .equipe-liste .poste { display: block; font-size: 0.875rem; color: var(--color-text-muted); }
 .equipe-liste .niv { font-size: 0.875rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 
+/* ---------- Formulaire : ajouter un joueur ---------- */
+
+.btn-ajout { margin-top: var(--space-3); }
+
+.formulaire { display: grid; gap: 20px; margin-top: var(--space-2); }
+
+.form-intro { font-size: 0.875rem; color: var(--color-text-muted); }
+
+.champ { margin: 0; padding: 0; border: 0; min-width: 0; }
+
+.champ > label,
+.champ > legend {
+  display: block;
+  margin-bottom: var(--space-2);
+  padding: 0;
+  font-weight: 800;
+}
+.legende-aide {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.champ input[type="text"] {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: 1rem;
+}
+.champ input[type="text"]::placeholder { color: var(--color-text-muted); opacity: 1; }
+.champ input[type="text"]:focus { outline: 3px solid var(--color-accent); outline-offset: 0; }
+
+/* Choix en puces : le vrai bouton radio reste accessible au clavier */
+.choix { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.choix label { position: relative; flex: 1 1 auto; }
+.choix input {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  margin: 0; opacity: 0; cursor: pointer;
+}
+.choix span {
+  display: flex; align-items: center; justify-content: center;
+  min-height: var(--touch);
+  padding: 0 var(--space-3);
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: 700;
+  transition: background .15s;
+}
+.choix input:checked + span { background: var(--color-accent); border-color: var(--color-accent); }
+.choix input:checked + span::before { content: "✓ "; white-space: pre; }
+.choix input:focus-visible + span { outline: 3px solid var(--color-text); outline-offset: 2px; }
+.choix-niveau label { flex: 1 1 0; }
+.choix-niveau span { padding: 0; }
+
+/* Erreurs : bordure rouge + texte, jamais la couleur seule */
+.champ input[aria-invalid="true"] { border-color: var(--color-error); }
+.champ[aria-invalid="true"] .choix span { border-color: var(--color-error); }
+.erreur-champ {
+  margin-top: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-error);
+}
+.erreur-champ::before { content: "⚠ "; }
+
+.carte.nouveau { animation: arrivee .6s ease-out; }
+@keyframes arrivee {
+  from { box-shadow: 0 0 0 4px var(--color-accent); }
+  to { box-shadow: 0 0 0 0 transparent; }
+}
+
 /* ---------- Pied de page ---------- */
 
 .pied {
@@ -405,7 +482,9 @@ main {
   background: var(--color-text);
   color: var(--color-bg);
   font-size: 0.9375rem; font-weight: 700;
-  white-space: nowrap;
+  width: max-content;
+  max-width: calc(100% - 2 * var(--space-3));
+  text-align: center;
   opacity: 0;
   transform: translate(-50%, 20px);
   pointer-events: none;
@@ -430,5 +509,5 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
