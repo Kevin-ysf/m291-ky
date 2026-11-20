@@ -47,8 +47,13 @@
         <button type="button" id="tout-decocher" class="lien-action" hidden>Tout décocher</button>
       </div>
 
-      <ul id="liste" class="liste" aria-label="Joueurs"></ul>
-      <p id="message-liste" class="message-liste" hidden></p>
+      <ul id="liste" class="liste" aria-label="Joueurs" aria-busy="true"></ul>
+      <p id="message-liste" class="message-liste" role="status">Chargement des joueurs…</p>
+
+      <button type="button" id="ouvrir-ajout" class="btn btn-secondaire btn-ajout">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+        Ajouter un joueur
+      </button>
 
       <footer class="pied">
         <p>© 2026 Kevin Youssef · M291</p>
@@ -58,6 +63,59 @@
         <p id="aide" class="aide">Coche au moins 4 joueurs.</p>
         <button type="button" id="faire" class="btn btn-principal" disabled>Faire les équipes</button>
       </div>
+    </section>
+
+    <!-- Formulaire : ajouter un joueur -->
+    <section id="vue-ajout" class="vue" aria-labelledby="titre-ajout" hidden>
+      <div class="entete-equipes">
+        <button type="button" id="annuler-ajout" class="btn-retour">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Annuler
+        </button>
+        <h1 id="titre-ajout" class="titre-equipes" tabindex="-1">Nouveau joueur</h1>
+      </div>
+
+      <form id="form-ajout" class="formulaire" novalidate>
+        <p class="form-intro">Il sera gardé sur ce téléphone. Tous les champs sont obligatoires.</p>
+
+        <div class="champ">
+          <label for="champ-prenom">Prénom</label>
+          <input type="text" id="champ-prenom" name="prenom" maxlength="20" autocomplete="off" autocapitalize="words" aria-describedby="erreur-prenom">
+          <p id="erreur-prenom" class="erreur-champ" hidden></p>
+        </div>
+
+        <fieldset class="champ" aria-describedby="erreur-sport">
+          <legend>Sport</legend>
+          <div class="choix">
+            <label><input type="radio" name="sport" value="foot"><span>Foot</span></label>
+            <label><input type="radio" name="sport" value="basket"><span>Basket</span></label>
+            <label><input type="radio" name="sport" value="volley"><span>Volley</span></label>
+          </div>
+          <p id="erreur-sport" class="erreur-champ" hidden></p>
+        </fieldset>
+
+        <div class="champ">
+          <label for="champ-poste">Poste</label>
+          <input type="text" id="champ-poste" name="poste" maxlength="20" autocomplete="off" placeholder="ex. Milieu" aria-describedby="erreur-poste">
+          <p id="erreur-poste" class="erreur-champ" hidden></p>
+        </div>
+
+        <fieldset class="champ" aria-describedby="erreur-niveau">
+          <legend>Niveau <span class="legende-aide">1 = débutant, 5 = très fort</span></legend>
+          <div class="choix choix-niveau">
+            <label><input type="radio" name="niveau" value="1"><span>1</span></label>
+            <label><input type="radio" name="niveau" value="2"><span>2</span></label>
+            <label><input type="radio" name="niveau" value="3"><span>3</span></label>
+            <label><input type="radio" name="niveau" value="4"><span>4</span></label>
+            <label><input type="radio" name="niveau" value="5"><span>5</span></label>
+          </div>
+          <p id="erreur-niveau" class="erreur-champ" hidden></p>
+        </fieldset>
+
+        <div class="barre-action">
+          <button type="submit" class="btn btn-principal">Ajouter le joueur</button>
+        </div>
+      </form>
     </section>
 
     <!-- Écran 3 : équipes générées -->
