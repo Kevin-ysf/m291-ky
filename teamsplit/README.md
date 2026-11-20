@@ -18,6 +18,16 @@ js/app.js         chargement, filtre, recherche, sélection, répartition, parta
 ## Les données (data.json)
 Chaque joueur a 8 champs typés : `id` (nombre), `prenom`, `sport`, `poste`, `commune` (textes), `niveau` (nombre de 1 à 5), `estRegulier` (booléen) et `tags` (tableau de textes). Les communes sont en Suisse romande. L’app utilise `prenom`, `sport`, `poste` et `niveau` ; `commune`, `estRegulier` et `tags` sont prêts pour un futur filtre.
 
+## Ajouter un joueur (formulaire)
+Le bouton « Ajouter un joueur » ouvre un formulaire : prénom, sport, poste et niveau de 1 à 5.
+* **Validation** au moment d’envoyer, puis en direct pendant la correction. Erreurs écrites sous chaque champ (jamais d’`alert`), bordure rouge **et** texte avec ⚠, focus placé sur le premier champ à corriger.
+* **Règles** : prénom de 2 lettres minimum, sans chiffres, pas de doublon dans le même sport ; poste obligatoire ; sport et niveau à choisir.
+* **Sauvegarde** : une page web ne peut pas réécrire `data.json` sur GitHub. Les joueurs ajoutés sont donc gardés dans le `localStorage` du téléphone et ajoutés à la liste au chargement. Si le stockage est bloqué (navigation privée), le joueur est ajouté pour la soirée seulement et un message le dit.
+* Le nouveau joueur est coché automatiquement et sa carte clignote en vert.
+
+## Recherche avec anti-rebond (S12-AV1)
+Le filtre attend 300 ms après la dernière touche avant de recalculer la liste (`debounce` avec `clearTimeout` / `setTimeout`). La croix d’effacement, elle, réagit tout de suite. Version commentée : [exercices/s12/debounce.js](../exercices/s12/debounce.js).
+
 ## Écarts avec la maquette (Piste C) et pourquoi
 * **Avatars allégés** (gris clair au lieu de noir) : la critique notait qu’ils écrasaient les prénoms.
 * **Marge basse de la liste** : la dernière carte n’est plus cachée par le bouton fixe.
