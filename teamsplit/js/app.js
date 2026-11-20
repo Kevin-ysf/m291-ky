@@ -4,6 +4,8 @@
 
 const MIN_JOUEURS = 4;
 const ESSAIS_REPARTITION = 3000;
+const ATTENTE_RECHERCHE = 300;
+const CLE_STOCKAGE = 'teamsplit-joueurs-ajoutes';
 
 const etat = {
   joueurs: [],
@@ -38,7 +40,12 @@ const el = {
   listeB: $('#liste-b'),
   remelanger: $('#remelanger'),
   partager: $('#partager'),
-  toast: $('#toast')
+  toast: $('#toast'),
+  vueAjout: $('#vue-ajout'),
+  titreAjout: $('#titre-ajout'),
+  ouvrirAjout: $('#ouvrir-ajout'),
+  annulerAjout: $('#annuler-ajout'),
+  formAjout: $('#form-ajout')
 };
 
 /* ---------- Chargement des données ---------- */
@@ -47,13 +54,38 @@ async function chargerJoueurs() {
   try {
     const reponse = await fetch('../data.json');
     if (!reponse.ok) throw new Error('HTTP ' + reponse.status);
-    etat.joueurs = await reponse.json();
+    const joueursJson = await reponse.json();
+    etat.joueurs = joueursJson.concat(lireJoueursAjoutes());
+    el.liste.setAttribute('aria-busy', 'false');
     afficherListe();
   } catch (erreur) {
     console.error(erreur);
+    el.liste.setAttribute('aria-busy', 'false');
     el.messageListe.textContent = 'Impossible de charger les joueurs. Ouvre le site avec un serveur local (par exemple Live Server).';
     el.messageListe.classList.add('erreur');
     el.messageListe.hidden = false;
+  }
+}
+
+/* ---------- Joueurs ajoutés (gardés sur le téléphone) ---------- */
+
+function lireJoueursAjoutes() {
+  try {
+    const texte = localStorage.getItem(CLE_STOCKAGE);
+    const liste = texte ? JSON.parse(texte) : [];
+    return Array.isArray(liste) ? liste : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function sauverJoueursAjoutes() {
+  const ajoutes = etat.joueurs.filter((j) => j.ajoute);
+  try {
+    localStorage.setItem(CLE_STOCKAGE, JSON.stringify(ajoutes));
+    return true;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -71,6 +103,15 @@ function echapper(texte) {
 
 function pluriel(n, mot) {
   return n + ' ' + mot + (n > 1 ? 's' : '');
+}
+
+// Anti-rebond : l'action ne part que quand on arrête de taper pendant attenteMs
+function debounce(action, attenteMs) {
+  let minuteur;
+  return (...args) => {
+    clearTimeout(minuteur);
+    minuteur = setTimeout(() => action(...args), attenteMs);
+  };
 }
 
 function joueursFiltres() {
@@ -300,11 +341,124 @@ async function partager() {
 /* ---------- Navigation entre écrans ---------- */
 
 function changerVue(vue) {
-  const equipes = vue === 'equipes';
-  el.vueSelection.hidden = equipes;
-  el.vueEquipes.hidden = !equipes;
+  el.vueSelection.hidden = vue !== 'selection';
+  el.vueEquipes.hidden = vue !== 'equipes';
+  el.vueAjout.hidden = vue !== 'ajout';
   window.scrollTo(0, 0);
-  (equipes ? el.titreEquipes : el.titreApp).focus();
+  const titres = { selection: el.titreApp, equipes: el.titreEquipes, ajout: el.titreAjout };
+  titres[vue].focus();
+}
+
+/* ---------- Formulaire : ajouter un joueur ---------- */
+
+const LETTRES = /^[A-Za-zÀ-ÖØ-öø-ÿ' .-]+$/;
+let formulaireEnvoye = false;
+
+function lireFormulaire() {
+  const f = el.formAjout.elements;
+  return {
+    prenom: f.prenom.value.trim().replace(/\s+/g, ' '),
+    sport: f.sport.value,
+    poste: f.poste.value.trim().replace(/\s+/g, ' '),
+    niveau: Number(f.niveau.value)
+  };
+}
+
+function validerJoueur(j) {
+  const erreurs = {};
+
+  if (j.prenom === '') {
+    erreurs.prenom = 'Écris un prénom.';
+  } else if (j.prenom.length < 2) {
+    erreurs.prenom = 'Le prénom doit faire au moins 2 lettres.';
+  } else if (!LETTRES.test(j.prenom)) {
+    erreurs.prenom = 'Lettres seulement (accents, tiret et apostrophe ok).';
+  } else if (j.sport && etat.joueurs.some((x) => x.sport === j.sport && normaliser(x.prenom) === normaliser(j.prenom))) {
+    erreurs.prenom = j.prenom + ' existe déjà en ' + j.sport + '. Ajoute une initiale, par exemple « ' + j.prenom + ' B. ».';
+  }
+
+  if (!j.sport) erreurs.sport = 'Choisis un sport.';
+
+  if (j.poste === '') {
+    erreurs.poste = 'Écris un poste, par exemple Milieu.';
+  } else if (j.poste.length < 2 || !LETTRES.test(j.poste)) {
+    erreurs.poste = 'Le poste doit faire au moins 2 lettres, sans chiffres.';
+  }
+
+  if (!(j.niveau >= 1 && j.niveau <= 5)) erreurs.niveau = 'Choisis un niveau de 1 à 5.';
+
+  return erreurs;
+}
+
+function afficherErreurs(erreurs) {
+  ['prenom', 'sport', 'poste', 'niveau'].forEach((champ) => {
+    const message = erreurs[champ];
+    const zone = $('#erreur-' + champ);
+    const cible = champ === 'prenom' || champ === 'poste'
+      ? $('#champ-' + champ)
+      : zone.closest('fieldset');
+    zone.textContent = message || '';
+    zone.hidden = !message;
+    cible.setAttribute('aria-invalid', message ? 'true' : 'false');
+  });
+}
+
+function premierChampEnErreur(erreurs) {
+  if (erreurs.prenom) return $('#champ-prenom');
+  if (erreurs.sport) return el.formAjout.querySelector('input[name="sport"]');
+  if (erreurs.poste) return $('#champ-poste');
+  return el.formAjout.querySelector('input[name="niveau"]');
+}
+
+function ouvrirFormulaire() {
+  el.formAjout.reset();
+  formulaireEnvoye = false;
+  afficherErreurs({});
+  if (etat.sport !== 'tous') {
+    el.formAjout.querySelector('input[name="sport"][value="' + etat.sport + '"]').checked = true;
+  }
+  changerVue('ajout');
+}
+
+function ajouterJoueur(e) {
+  e.preventDefault();
+  formulaireEnvoye = true;
+  const joueur = lireFormulaire();
+  const erreurs = validerJoueur(joueur);
+  afficherErreurs(erreurs);
+
+  if (Object.keys(erreurs).length > 0) {
+    premierChampEnErreur(erreurs).focus();
+    return;
+  }
+
+  const majuscules = (texte) => texte.replace(/(^|[\s'-])(\S)/g, (m, avant, lettre) => avant + lettre.toUpperCase());
+  const idMax = etat.joueurs.reduce((max, j) => Math.max(max, j.id), 0);
+  const nouveau = {
+    id: idMax + 1,
+    prenom: majuscules(joueur.prenom),
+    sport: joueur.sport,
+    poste: joueur.poste.charAt(0).toUpperCase() + joueur.poste.slice(1),
+    niveau: joueur.niveau,
+    commune: '',
+    estRegulier: false,
+    tags: [],
+    ajoute: true
+  };
+  etat.joueurs.push(nouveau);
+  etat.presents.add(nouveau.id);
+  const garde = sauverJoueursAjoutes();
+
+  choisirSport(nouveau.sport);
+  changerVue('selection');
+  const carte = el.liste.querySelector('.carte[data-id="' + nouveau.id + '"]');
+  if (carte) {
+    carte.classList.add('nouveau');
+    carte.scrollIntoView({ block: 'center' });
+  }
+  afficherToast(garde
+    ? nouveau.prenom + ' ajouté et coché !'
+    : nouveau.prenom + ' ajouté pour ce soir (pas gardé sur ce téléphone).');
 }
 
 /* ---------- Événements ---------- */
@@ -318,10 +472,14 @@ el.puces.forEach((puce) => {
   puce.addEventListener('click', () => choisirSport(puce.dataset.sport));
 });
 
-el.recherche.addEventListener('input', () => {
+const filtrerAvecPause = debounce(() => {
   etat.recherche = el.recherche.value;
-  el.effacer.hidden = el.recherche.value === '';
   afficherListe();
+}, ATTENTE_RECHERCHE);
+
+el.recherche.addEventListener('input', () => {
+  el.effacer.hidden = el.recherche.value === '';
+  filtrerAvecPause();
 });
 
 el.formRecherche.addEventListener('submit', (e) => {
@@ -347,6 +505,14 @@ el.faire.addEventListener('click', faireEquipes);
 el.retour.addEventListener('click', () => changerVue('selection'));
 el.remelanger.addEventListener('click', remelanger);
 el.partager.addEventListener('click', partager);
+el.ouvrirAjout.addEventListener('click', ouvrirFormulaire);
+el.annulerAjout.addEventListener('click', () => changerVue('selection'));
+el.formAjout.addEventListener('submit', ajouterJoueur);
+
+// Après un premier envoi, les erreurs se corrigent en direct
+el.formAjout.addEventListener('input', () => {
+  if (formulaireEnvoye) afficherErreurs(validerJoueur(lireFormulaire()));
+});
 
 afficherSurtitre();
 chargerJoueurs();
